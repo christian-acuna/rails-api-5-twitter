@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :validatable
 
   after_create :update_access_token!
+  has_many :tweets
 
   validates :username, presence: true
   validates :email, presence: true
