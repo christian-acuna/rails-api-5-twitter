@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207172917) do
+ActiveRecord::Schema.define(version: 20161211041622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hashtag_tweets", force: :cascade do |t|
+    t.integer  "tweet_id"
+    t.integer  "hashtag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string   "title"
@@ -22,6 +35,11 @@ ActiveRecord::Schema.define(version: 20161207172917) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stories_on_user_id", using: :btree
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string  "content"
+    t.integer "author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,6 +57,8 @@ ActiveRecord::Schema.define(version: 20161207172917) do
     t.datetime "updated_at",                          null: false
     t.string   "access_token"
     t.string   "username"
+    t.string   "handle"
+    t.string   "avatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
