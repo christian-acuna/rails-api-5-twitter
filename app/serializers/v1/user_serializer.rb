@@ -1,5 +1,5 @@
 module V1
   class UserSerializer < ActiveModel::Serializer
-    attributes :username
+    attributes :username, :handel, :id
   end
 end
